@@ -280,6 +280,6 @@ class V1::ResourceController < ApplicationController
   end
 
   def default_query
-    { account_id: current_account.id }
+    { }
   end
 end
