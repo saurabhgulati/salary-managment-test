@@ -1,7 +1,8 @@
 class CreateEmployees < ActiveRecord::Migration[8.1]
   def change
     create_table :employees do |t|
-      t.string :full_name, null: false
+      t.string :first_name, null: false
+      t.string :last_name, null: false
       t.string :email, null: false
       t.string :job_title, null: false
       t.string :department, null: false

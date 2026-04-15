@@ -1,9 +1,24 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require 'benchmark'
+
+countries = [
+  "United States", "Canada", "United Kingdom", "Germany", "France",
+  "India", "Japan", "Australia", "Brazil", "Nigeria",
+  "South Africa", "Mexico", "Singapore", "Netherlands", "Sweden"
+]
+
+job_titles = [
+  "Software Engineer", "Senior Software Engineer", "Staff Engineer",
+  "Engineering Manager", "Product Manager", "Senior Product Manager",
+  "UX Designer", "Senior UX Designer", "Data Analyst", "Data Scientist",
+  "DevOps Engineer", "QA Engineer", "Technical Lead", "Solutions Architect",
+  "Frontend Developer", "Backend Developer", "Full Stack Developer",
+  "Mobile Developer", "Cloud Engineer", "Security Engineer",
+  "Marketing Manager", "Sales Representative", "Account Executive",
+  "HR Coordinator", "Finance Analyst", "Operations Manager"
+]
+
+elapsed = Benchmark.realtime do
+  Seed::EmployeeSeeder.new(count: 10_000, countries: countries, job_titles: job_titles).call
+end
+
+puts "[Seed] Completed in #{elapsed.round(2)}s"
